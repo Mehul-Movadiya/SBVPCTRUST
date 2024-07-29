@@ -1,0 +1,116 @@
+<?php
+include_once('header.php');
+?>
+<!-- partial -->
+<div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+
+          <!-- for searching.............. -->
+          <!-- <div class="navbar-menu-wrapper navbar-search-wrapper d-none d-lg-flex align-items-center">
+          <ul class="navbar-nav mr-lg-2">
+            <li class="nav-item nav-search d-none d-lg-block">
+              <div class="input-group">
+              <form method="POST">
+                <input type="text" name="table_search" class="form-control" placeholder="Search Here..." aria-label="search" aria-describedby="search">
+                
+                <br>
+
+                <button type="submit" class="btn btn-primary mr-2">
+                <i class="mdi mdi-account-search"></i> Search</button>
+                
+              </form>
+
+              </div>
+            </li>
+          </ul>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+            </li>
+          </ul>
+        </div> -->
+        <!-- .................. -->
+        <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h2 class="card-title" style="font-size:30px">Relative List</h2>
+                  <form method="POST">
+                        <div class="row">
+                        <div class="col-lg-2">
+                        <a class="btn btn-primary mr-2" style = "color: white;" href = "relativeadd.php">
+                  Add Relative
+                    </a>
+                        </div>
+                        <div class="col-lg-8">
+                            <input type="text" name="table_search" class="form-control" placeholder="Search Here..." aria-label="search" aria-describedby="search">
+                        </div>
+                        <div class="col-lg-2">
+                            <button type="submit" class="btn btn-primary mr-2">
+                                <i class="mdi mdi-account-search"></i> Search</button>
+                        </div>
+                        
+                        </div>
+                        </form>
+                  <div class="table-responsive">
+
+                  <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                    <th>image</th>
+                                        <th>relativeid</th>
+                                        <th>memberId</th>
+                                        <th>relation</th>
+                                        <th>name</th>
+                                        <th>email</th>
+                                        <th>gender</th>
+                                        <th>education</th>
+                                        <th>profession</th>
+                                        <th>dob</th>
+                                        <th>inlaws</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                    if (isset($_POST['table_search'])) {
+                                        $txt = $_POST['table_search'];
+                                        $rs = $conn->query("select * from `relativeview` where name like '$txt%' OR gender like '$txt%' OR education like '$txt%' OR profession like '$txt%'");
+                                    } else {
+                                        $rs = $conn->query("select * from `relativeview`");
+                                    }
+                                    while($row = $rs -> fetch_assoc()) {
+                                    ?>
+                                        <tr>
+                                            <td><img src="../<?php echo $row['image']; ?>" height="50px"> </td>
+                                            <td><?php echo $row['relative_id']; ?></td>
+                                            <td><?php echo $row['member_name']; ?></td>
+                                            <td><?php echo $row['relation']; ?></td>
+                                            <td><?php echo $row['name']; ?></td>
+                                            <td><?php echo $row['email']; ?></td>
+                                            <td><?php echo $row['gender']; ?></td>
+                                            <td><?php echo $row['education']; ?></td>
+                                            <td><?php echo $row['profession']; ?></td>
+                                            <td><?php echo $row['dob']; ?></td>
+                                            <td><?php echo $row['Inloves']; ?></td>
+                                            <td>
+                                            <div class="col-sm-6 col-md-4 col-lg-3" style="max-width:100%;">
+                                              <a class="mdi mdi-pencil" href="editrelative.php?relative_id=<?php echo $row['relative_id']; ?>"></a> 
+                                              <a class="mdi mdi-delete" href="deleterelative.php?id=<?php echo $row['relative_id']; ?>" onclick="return confirmDelete();"></a><script>
+                                                function confirmDelete() {
+                                                    return confirm("Are you sure you want to delete this?");
+                                                }
+                                                </script></td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                                </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+<?php
+include_once('footer.php');
+?>
