@@ -22,25 +22,71 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $mstatus = strip_tags($_POST['married_status']);
 
     if (!empty($_FILES['image']['name'])) {
-        $target_dir = "memberimages/";
-        $imageFileType = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
-        $target_file = $target_dir . "M_" . $memberid . "." . $imageFileType;
-        move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
-        $target_file = "M_" . $memberid . "." . $imageFileType;
+      // Fetch the old image name from the database
+      $sql = "SELECT image FROM member WHERE member_id='$memberid'";
+      $result = mysqli_query($conn, $sql);
+      $oldImage = mysqli_fetch_assoc($result)['image'];
+  
+      $target_dir = "memberimages/";
+      $imageFileType = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+      $allowedExtensions = array("jpg", "jpeg", "png", "gif");
 
-        $stmt = $conn->prepare("UPDATE member SET member_name=?, home_address=?, contact_no=?, email=?, gender=?, education=?, profession=?, dob=?, home_pincode=?, business_address=?, business_pincode=?, married_status=?, image=? WHERE member_id=?");
-        $stmt->bind_param("ssssssssssssss", $mname, $haddress, $cno, $mail, $gender, $edu, $prof, $dob, $hpin, $businessadd, $businesspin, $mstatus, $target_file, $memberid);
-        $stmt->execute();
-    } else {
+      foreach ($allowedExtensions as $ext) {
+        $oldFile = $target_dir . "M_" . $memberid . "." . $ext;
+        if (file_exists($oldFile)) {
+            unlink($oldFile);
+        }
+      }
+
+  
+      // Check file extension
+      $allowedExtensions = array("jpg", "jpeg", "png", "gif");
+      if (!in_array($imageFileType, $allowedExtensions)) {
+          echo "<script>alert('Sorry, only JPG, JPEG, PNG & GIF files are allowed.'); window.location.href = window.location.href;</script>";
+          exit();
+      }
+  
+      // Check file size (5MB limit)
+      if ($_FILES["image"]["size"] > 5000000) {
+          echo "<script>alert('Sorry, your file is too large. Maximum size is 5MB.'); window.location.href = window.location.href;</script>";
+          exit();
+      }
+  
+      $newImageName = "M_" . $memberid . "." . $imageFileType;
+      $target_file = $target_dir . $newImageName;
+  
+      // Delete all possible old image files
+      foreach ($allowedExtensions as $ext) {
+          $oldFile = $target_dir . "M_" . $memberid . "." . $ext;
+          if (file_exists($oldFile)) {
+              unlink($oldFile);
+          }
+      }
+  
+      if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+          $stmt = $conn->prepare("UPDATE member SET member_name=?, home_address=?, contact_no=?, email=?, gender=?, education=?, profession=?, dob=?, home_pincode=?, business_address=?, business_pincode=?, married_status=?, image=? WHERE member_id=?");
+          if ($stmt === false) {
+              die("Error preparing statement: " . $conn->error);
+          }
+          $stmt->bind_param("ssssssssssssss", $mname, $haddress, $cno, $mail, $gender, $edu, $prof, $dob, $hpin, $businessadd, $businesspin, $mstatus, $newImageName, $memberid);
+          
+          if ($stmt->execute()) {
+              echo "<script>alert('Profile updated successfully with image.'); window.location.href = window.location.href;</script>";
+          } else {
+              echo "<script>alert('Failed to update profile with image: " . $stmt->error . "'); window.location.href = window.location.href;</script>";
+          }
+      } else {
+          echo "<script>alert('Failed to upload image. Error: " . error_get_last()['message'] . "'); window.location.href = window.location.href;</script>";
+      }
+  } else {
         $stmt = $conn->prepare("UPDATE member SET member_name=?, home_address=?, contact_no=?, email=?, gender=?, education=?, profession=?, dob=?, home_pincode=?, business_address=?, business_pincode=?, married_status=? WHERE member_id=?");
         $stmt->bind_param("sssssssssssss", $mname, $haddress, $cno, $mail, $gender, $edu, $prof, $dob, $hpin, $businessadd, $businesspin, $mstatus, $memberid);
-        $stmt->execute();
+        if ($stmt->execute()) {
+            echo "<script>alert('Profile updated successfully.'); window.location.href = window.location.href;</script>";
+        } else {
+            echo "<script>alert('Failed to update profile.');</script>";
+        }
     }
-
-    echo "<script>
-        alert('Updated');
-        window.location.href = window.location.href; // Refresh the page
-    </script>";
     exit();
 } else {
     if (isset($_COOKIE['member_id'])) {
@@ -53,8 +99,56 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         exit();
     }
 }
+
+
+
 ?>
 
+<style>
+  .update-profile-form {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .update-profile-form h1 {
+    color: #007bff;
+    margin-bottom: 30px;
+  }
+
+  .update-profile-form .form-control {
+    margin-bottom: 20px;
+  }
+
+  .update-profile-form .btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 30px;
+    font-size: 18px;
+    transition: background-color 0.3s;
+  }
+
+  .update-profile-form .btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  .gender-group {
+    display: flex;
+    justify-content: start;
+    margin-bottom: 20px;
+  }
+
+  .gender-group .form-check {
+    margin-right: 20px;
+  }
+
+  #imagePreview {
+    max-width: 200px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+</style>
 
 
     <!-- Header Start -->
@@ -75,140 +169,95 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <!-- Contact Start -->
     <div class="container-fluid pt-5">
-      <div class="container">
-        <div class="text-center pb-2">
-          <!-- <p class="section-title px-5">
-            <span class="px-2">Login</span>
-          </p> -->
-          <h1 class="mb-4">Update Profile</h1>
-        </div>
-        <div class="row">
-        <div class="col-lg-3 mb-5">
-        </div>
-          <div class="col-lg-6 mb-5">
-            <div class="contact-form">
-              <div id="success"></div>
-              <form novalidate="novalidate" method="post" enctype="multipart/form-data">
-                <div class="control-group">
-                 <input type="text" class="form-control" id="member_name" name="member_name" value="<?php if (isset($row['member_name'])) echo $row['member_name'];?>" placeholder="Name" required>
-                  <p class="help-block text-danger"></p>
-                </div>
-
-                <div class="control-group">
-                      <input type="text" class="form-control" id="home_address" name="home_address" value="<?php if (isset($row['home_address'])) echo $row['home_address'];?>" placeholder="home address" required>
-                      <p class="help-block text-danger"></p>
-                </div>
-
-                <div class="control-group">
-                      <input type="text" class="form-control" id="contact_no" name="contact_no" value="<?php if (isset($row['contact_no'])) echo $row['contact_no'];?>" placeholder="contactno" required>
-                      <p class="help-block text-danger"></p>
-
-                    </div>
-                    <div class="control-group">
-                      <input type="text" class="form-control" id="email" name="email" value="<?php if (isset($row['email'])) echo $row['email'];?>" placeholder="email" required>
-                      <p class="help-block text-danger"></p>
-
-                    </div>
-                                
-
-                <div class="control-group">
-                  <!-- <input type="password" class="form-control" id="email" name="email" placeholder="Your Email" required="required"
-                    data-validation-required-message="Please enter your Email"/> -->
-
-
-                    <div class="col-sm-4">
-                            <div class="form-check">
-                              <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="gender" id="gender" value="Male" <?php if(isset($row['gender'])){if($row['gender']=='Male') echo "checked";}?>>
-                                Male
-                              <i class="input-helper"></i></label>
-                            </div>
-                          </div>
-                          <div class="col-sm-5">
-                            <div class="form-check">
-                              <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="gender" id="gender" value="Female"  <?php if(isset($row['gender'])){if($row['gender']=='Female') echo "checked";}?>>
-                                Female
-                                <i class="input-helper"></i></label>
-                            </div>
-                          </div>
-                        </div>
-                         
-                  <p class="help-block text-danger"></p>
-                </div>
-
-                <div class="control-group">
-                      <input type="text" class="form-control" id="education" name="education" value="<?php if (isset($row['education'])) echo $row['education'];?>" placeholder="education" required>
-                      <p class="help-block text-danger"></p>
-                </div>
-
-
-                <div class="control-group">
-                      <input type="text" class="form-control" id="profession" name="profession" value="<?php if (isset($row['profession'])) echo $row['profession'];?>" placeholder="profession" required>
-                      <p class="help-block text-danger"></p>
-                </div>
-
-
-
-                <div class="control-group">
-                      <input type="text" class="form-control" id="dob" name="dob" value="<?php if (isset($row['dob'])) echo $row['dob'];?>" placeholder="dob" required>
-                      <p class="help-block text-danger"></p>
-                </div>
-
-
-                <div class="control-group">
-                      <input type="text" class="form-control" id="home_pincode" name="home_pincode" value="<?php if (isset($row['home_pincode'])) echo $row['home_pincode'];?>" placeholder="home pincode" required>
-                      <p class="help-block text-danger"></p>
-                </div>
-
-                <div class="control-group">
-                      <input type="text" class="form-control" id="business_address" name="business_address" value="<?php if (isset($row['business_address'])) echo $row['business_address'];?>" placeholder="business address" required>
-                      <p class="help-block text-danger"></p>
-                </div>
-
-                <div class="control-group">
-                      <input type="text" class="form-control" id="business_pincode" name="business_pincode" value="<?php if (isset($row['business_pincode'])) echo $row['business_pincode'];?>" placeholder="business pincode" required>
-                      <p class="help-block text-danger"></p>
-                </div>
-
-
-
-                <div class="control-group">
-                <select class="form-control" id="married_status" name="married_status" required>
-                  <option value="" disabled selected>Select your marital status</option>
-                  <option value="Married" <?php if (isset($row['married_status']) && $row['married_status'] == 'Married') echo 'selected';?>>Married</option>
-                  <option value="Unmarried" <?php if (isset($row['married_status']) && $row['married_status'] == 'Unmarried') echo 'selected';?>>Unmarried</option>
-                </select>                      
-                <p class="help-block text-danger"></p>
-                </div>
-
-                <div class="control-group">
-                                <div class="form-group">
-                                <img src="memberimages/<?php if (isset($row['image'])) echo $row['image'];?>" width="100px">
-                                <input type="file"  accept=".jpg, .jpeg, .png, .bmp" class="form-control" id="image" name="image" placeholder="image"  onchange="Filevalidation()">
-
-                                </div>
-                            </div>
-
-                <div style="text-align:center;">
-                  <button class="btn btn-primary py-2 px-4" type="submit"
-                    id="sendMessageButton"
-                    style="min-width:200px"
-                  >
-                    Update
-                  </button>
-                </div>
-              </form>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="update-profile-form">
+          <h1 class="text-center mb-4">Update Profile</h1>
+          <form novalidate="novalidate" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <input type="text" class="form-control" id="member_name" name="member_name" value="<?php echo isset($row['member_name']) ? htmlspecialchars($row['member_name']) : ''; ?>" placeholder="Name" required>
             </div>
-          </div>
-          
+
+            <div class="form-group">
+              <input type="text" class="form-control" id="home_address" name="home_address" value="<?php echo isset($row['home_address']) ? htmlspecialchars($row['home_address']) : ''; ?>" placeholder="Home Address" required>
+            </div>
+
+            <div class="form-group">
+              <input type="tel" class="form-control" id="contact_no" name="contact_no" value="<?php echo isset($row['contact_no']) ? htmlspecialchars($row['contact_no']) : ''; ?>" placeholder="Contact Number" required>
+            </div>
+
+            <div class="form-group">
+              <input type="email" class="form-control" id="email" name="email" value="<?php echo isset($row['email']) ? htmlspecialchars($row['email']) : ''; ?>" placeholder="Email" required>
+            </div>
+
+            <div class="form-group">
+              <label>Gender</label>
+              <div class="gender-group">
+                <div class="form-check form-check-inline">
+                  <input type="radio" class="form-check-input" name="gender" id="male" value="Male" <?php echo (isset($row['gender']) && $row['gender'] == 'Male') ? 'checked' : ''; ?>>
+                  <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="radio" class="form-check-input" name="gender" id="female" value="Female" <?php echo (isset($row['gender']) && $row['gender'] == 'Female') ? 'checked' : ''; ?>>
+                  <label class="form-check-label" for="female">Female</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" id="education" name="education" value="<?php echo isset($row['education']) ? htmlspecialchars($row['education']) : ''; ?>" placeholder="Education" required>
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" id="profession" name="profession" value="<?php echo isset($row['profession']) ? htmlspecialchars($row['profession']) : ''; ?>" placeholder="Profession" required>
+            </div>
+
+            <div class="form-group">
+              <input type="date" class="form-control" id="dob" name="dob" value="<?php echo isset($row['dob']) ? htmlspecialchars($row['dob']) : ''; ?>" required>
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" id="home_pincode" name="home_pincode" value="<?php echo isset($row['home_pincode']) ? htmlspecialchars($row['home_pincode']) : ''; ?>" placeholder="Home Pincode" required>
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" id="business_address" name="business_address" value="<?php echo isset($row['business_address']) ? htmlspecialchars($row['business_address']) : ''; ?>" placeholder="Business Address" required>
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" id="business_pincode" name="business_pincode" value="<?php echo isset($row['business_pincode']) ? htmlspecialchars($row['business_pincode']) : ''; ?>" placeholder="Business Pincode" required>
+            </div>
+
+            <div class="form-group">
+              <select class="form-control" id="married_status" name="married_status" required>
+                <option value="" disabled selected>Select your marital status</option>
+                <option value="Married" <?php echo (isset($row['married_status']) && $row['married_status'] == 'Married') ? 'selected' : ''; ?>>Married</option>
+                <option value="Unmarried" <?php echo (isset($row['married_status']) && $row['married_status'] == 'Unmarried') ? 'selected' : ''; ?>>Unmarried</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="image">Profile Picture</label>
+              <img id="imagePreview" src="memberimages/<?php echo isset($row['image']) ? htmlspecialchars($row['image']) : ''; ?>" alt="Profile Picture" class="img-thumbnail mb-2" style="max-width: 200px; display: <?php echo isset($row['image']) ? 'block' : 'none'; ?>;">
+              <input type="file" accept=".jpg, .jpeg, .png, .bmp" class="form-control-file" id="image" name="image" onchange="Filevalidation()">
+            </div>
+
+            <div class="text-center mt-4">
+              <button class="btn btn-primary btn-lg" type="submit" id="sendMessageButton">
+                Update Your Data
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-    <!-- Contact End -->
+  </div>
+</div>
 <?php
 include_once('footer.php');
 ?>
+
 <script>
         Filevalidation = () => {
             const fi = document.getElementById('image');
@@ -229,4 +278,20 @@ include_once('footer.php');
                 }
             }
         }
+</script>
+<script>
+function Filevalidation() {
+  const input = document.getElementById('image');
+  const imagePreview = document.getElementById('imagePreview');
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    imagePreview.src = e.target.result;
+    imagePreview.style.display = 'block';
+  }
+
+  if (input.files && input.files[0]) {
+    reader.readAsDataURL(input.files[0]);
+  }
+}
 </script>
