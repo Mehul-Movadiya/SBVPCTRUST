@@ -50,7 +50,7 @@ include_once('dbconfig.php');
       <a href="index.php" class="navbar-brand font-weight-bold text-secondary">
         <img src="img/logo.png" class="logo" height="110px">
         <!-- <h4 style="color:skyblue; vertical-align: top;" class="d-inline-block py-4"><b>શ્રી સમસ્ત બાવનગોળ વાટલિયા </br><h4 style="color:skyblue;">&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspપ્રજાપતિ સમાજ</h4></b></h4> -->
-        <span class="text-primary"><div style="display: inline-block;vertical-align:middle;font-family: 'rasabold';">સર્વ બાવન ગોળ વાટલિયા<br>પ્રજાપતિ ચેરીટેબલ ટ્રસ્ટ<br>
+        <span class="text-primary"><div style="display: inline-block;vertical-align:middle;font-family: 'rasabold';">સર્વ બાવનગોળ વાટલિયા<br>પ્રજાપતિ ચેરીટેબલ ટ્રસ્ટ<br>
         <h6 style="font-size:small">Trust Reg. No.:A/5300/AHMEDABAD</h6></div></span>
         
     </a>
