@@ -1,164 +1,71 @@
-
-    <!-- Footer Start -->
-    <div
-      class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5"
-    >
-      <div class="row pt-5">
-        <div class="col-lg-4 col-md-6 mb-5">
-          <!-- <a
-            href=""
-            class="navbar-brand font-weight-bold text-primary m-0 mb-4 p-0"
-            style="font-size: 40px; line-height: 40px"
-          >
-            <i class="flaticon-043-teddy-bear"></i>
-            <span class="text-white">KidKinder</span>
-          </a> -->
-          <center>
-          <a href="index.php" class="navbar-brand font-weight-bold text-secondary">
-            <img src="img/logo.png" class="logo" style="height: 200px;">
-            <!-- <h4 style="color:skyblue; vertical-align: top;" class="d-inline-block py-4"><b>શ્રી સમસ્ત બાવનગોળ વાટલિયા </br><h4 style="color:skyblue;">&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspપ્રજાપતિ સમાજ</h4></b></h4> -->
-            <span class="text-white"><div style="text-align: center;margin-top: 20px;font-family: 'rasabold';">સર્વ બાવનગોળ વાટલિયા<br>પ્રજાપતિ ચેરીટેબલ ટ્રસ્ટ</div></span>
-        </a>
-          
-          <!-- <div class="d-flex justify-content-start mt-4">
-            <a
-              class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
-              style="width: 38px; height: 38px"
-              href="#"
-              ><i class="fab fa-twitter"></i
-            ></a>
-            <a
-              class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
-              style="width: 38px; height: 38px"
-              href="#"
-              ><i class="fab fa-facebook-f"></i
-            ></a>
-            <a
-              class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
-              style="width: 38px; height: 38px"
-              href="#"
-              ><i class="fab fa-linkedin-in"></i
-            ></a>
-            <a
-              class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
-              style="width: 38px; height: 38px"
-              href="#"
-              ><i class="fab fa-instagram"></i
-            ></a>
-          </div> -->
-</center>
+<footer class="bg-secondary text-white py-5 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-5">
+                <div class="footer-brand text-center">
+                    <a href="index.php" class="d-inline-block">
+                        <img src="img/logo.png" alt="સર્વ બાવનગોળ વાટલિયા પ્રજાપતિ ચેરીટેબલ ટ્રસ્ટ Logo" class="img-fluid" style="max-height: 150px;">
+                    </a>
+                    <h2 class="h5 text-white mt-3" style="font-family: 'rasabold';">
+                        સર્વ બાવનગોળ વાટલિયા<br>પ્રજાપતિ ચેરીટેબલ ટ્રસ્ટ
+                    </h2>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-5">
+                <h3 class="h4 text-primary mb-4">Contact Information</h3>
+                <address>
+                    <div class="d-flex mb-3">
+                        <i class="fas fa-map-marker-alt text-primary mr-3 mt-1" aria-hidden="true"></i>
+                        <div>
+                            <h4 class="h6 text-white">Address</h4>
+                            <p class="mb-0">115, ANAND VIHAR BUNGALOW, IOC ROAD CHANDKHEDA, TRAGAD, AHMEDABAD, GUJARAT - INDIA - 382424</p>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <i class="fas fa-envelope text-primary mr-3 mt-1" aria-hidden="true"></i>
+                        <div>
+                            <h4 class="h6 text-white">Email</h4>
+                            <p class="mb-0"><a href="mailto:info@sbvpctrust.com" class="text-white">info@sbvpctrust.com</a></p>
+                        </div>
+                    </div>
+                </address>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-5">
+                <h3 class="h4 text-primary mb-4" style="font-family: 'rasabold';">દાન માટેની માહિતી</h3>
+                <p>Donation covered u/s 80G of Income Tax Act.</p>
+                <p>Exempted U/S 12A of the Income Tax Act. 1961.</p>
+                <p>Prov Reg No.: ABITS0115RE20231</p>
+                <p>80G Reg. No.: ABITS00115RE20241</p>
+            </div>
         </div>
-        <div class="col-lg-4 col-md-6 mb-5">
-          <h3 class="text-primary mb-4">Get In Touch</h3>
-          <div class="d-flex">
-            <h4 class="fa fa-map-marker-alt text-primary"></h4>
-            <div class="pl-3">
-              <h5 class="text-white">Address</h5>
-              <p>115, ANAND VIHAR BUNGALOW,IOC ROAD CHANDKHEDA,
-TRAGAD,AHMEDABAD
-AHMEDABAD
-GUJARAT - INDIA - 382424</p>
-            </div>
-          </div>
-          <div class="d-flex">
-            <h4 class="fa fa-envelope text-primary"></h4>
-            <div class="pl-3">
-              <h5 class="text-white">Email</h5>
-              <p>info@sbvpctrust.com</p>
-            </div>
-          </div>
-          <!-- <div class="d-flex">
-            <h4 class="fa fa-phone-alt text-primary"></h4>
-            <div class="pl-3">
-              <h5 class="text-white">Phone</h5>
-              <p>+012 345 67890</p>
-            </div>
-          </div> -->
-        </div>
-        <div class="col-lg-4 col-md-6 mb-5">
-          <h3 class="text-primary mb-4" style="font-family: 'rasabold';">દાન માટેની માહિતી</h3>
-          <div class="d-flex">
-            <!-- <h4 class="fa fa-map-marker-alt text-primary"></h4> -->
-            <div class="pl-3">
-            <!-- <p style="font-family: 'rasabold';">આપના દાનની રાશિ નીચે જણાવેલ એકાંઉન્ટ નંબરમાં મોકલો</p> -->
-            <p>Donation covered u/s 80G of Income Tax Act.</p>
-<p>Exempted U/S 12A of the Income Tax Act. 1961. prov Reg No. :-ABITS0115RE20231 &
-80G Reg. No. ABITS00115RE20241</p>
-            </div>
-          </div>
-          
-        </div>
-        <!-- <div class="col-lg-3 col-md-6 mb-5">
-          <h3 class="text-primary mb-4">Newsletter</h3>
-          <form action="">
-            <div class="form-group">
-              <input
-                type="text"
-                class="form-control border-0 py-4"
-                placeholder="Your Name"
-                required="required"
-              />
-            </div>
-            <div class="form-group">
-              <input
-                type="email"
-                class="form-control border-0 py-4"
-                placeholder="Your Email"
-                required="required"
-              />
-            </div>
-            <div>
-              <button
-                class="btn btn-primary btn-block border-0 py-3"
-                type="submit"
-              >
-                Submit Now
-              </button>
-            </div>
-          </form>
-        </div> -->
-      </div>
-      <div
-        class="container-fluid pt-5"
-        style="border-top: 1px solid rgba(23, 162, 184, 0.2) ;"
-      >
-        <p class="m-0 text-center text-white">
-          &copy;
-          <a class="text-primary font-weight-bold" href="#">sbvpctrust.com</a>.
-          All Rights Reserved.
-
-          <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-          <!-- Designed by
-          <a class="text-primary font-weight-bold" href="https://htmlcodex.com"
-            >HTML Codex</a
-          >
-          <br />Distributed By:
-          <a href="https://themewagon.com" target="_blank">ThemeWagon</a> -->
-        </p>
-      </div>
     </div>
-    <!-- Footer End -->
+    <div class="container">
+        <hr class="border-primary my-4">
+        <p class="text-center mb-0">
+            &copy; 2023 <a href="https://sbvpctrust.com" class="text-primary">sbvpctrust.com</a>. All Rights Reserved.
+        </p>
+    </div>
+</footer>
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-primary p-3 back-to-top"
-      ><i class="fa fa-angle-double-up"></i
-    ></a>
+<a href="#top" class="btn btn-primary p-3 back-to-top" aria-label="Back to top">
+    <i class="fas fa-angle-up" aria-hidden="true"></i>
+</a>
 
-    <!-- JavaScript Libraries -->
-    <script src="js/jquery-3.7.1.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/isotope/isotope.pkgd.min.js"></script>
-    <script src="lib/lightbox/js/lightbox.min.js"></script>
-    <script language="JavaScript" src="js/dataTables.bootstrap5.js" type="text/javascript"></script>
-    <script language="JavaScript" src="js/dataTables.js" type="text/javascript"></script>
-    
-    <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="lib/isotope/isotope.pkgd.min.js"></script>
+<script src="lib/lightbox/js/lightbox.min.js"></script>
+<script src="js/dataTables.bootstrap5.js"></script>
+<script src="js/dataTables.js"></script>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-  </body>
+<!-- Contact Javascript File -->
+<script src="mail/jqBootstrapValidation.min.js"></script>
+<script src="mail/contact.js"></script>
+
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+</body>
 </html>
