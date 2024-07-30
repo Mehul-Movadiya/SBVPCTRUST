@@ -1,74 +1,56 @@
 <?php
 include_once('header.php');
-?>
-<?php
-if(isset($_COOKIE['member_id'])==false)
-header("location: login.php");
 
-if ($_SERVER['REQUEST_METHOD']=="POST")
-{
+if (!isset($_COOKIE['member_id'])) {
+    header("location: login.php");
+    exit();
+}
 
-    $mname =strip_tags($_POST['member_name']);
-    $haddress =strip_tags($_POST['home_address']);
-    // session_start();
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $mname = strip_tags($_POST['member_name']);
+    $haddress = strip_tags($_POST['home_address']);
     $memberid = $_COOKIE['member_id'];
-    $cno =strip_tags($_POST['contact_no']);
+    $cno = strip_tags($_POST['contact_no']);
     $mail = strip_tags($_POST['email']);
-    // $pwd = mysqli_real_escape_string($conn,$_POST['password']);
     $gender = $_POST['gender'];
     $edu = strip_tags($_POST['education']);
-    $prof =strip_tags($_POST['profession']);
-    $dob =strip_tags($_POST['dob']);
-    // $gid =mysqli_real_escape_string($conn, $_POST['gotra_id']);
-    $hpin =strip_tags($_POST['home_pincode']);
-    $businessadd =strip_tags($_POST['business_address']);
-    $businesspin =strip_tags($_POST['business_pincode']);
-    $mstatus =strip_tags($_POST['married_status']);
+    $prof = strip_tags($_POST['profession']);
+    $dob = strip_tags($_POST['dob']);
+    $hpin = strip_tags($_POST['home_pincode']);
+    $businessadd = strip_tags($_POST['business_address']);
+    $businesspin = strip_tags($_POST['business_pincode']);
+    $mstatus = strip_tags($_POST['married_status']);
 
+    if (!empty($_FILES['image']['name'])) {
+        $target_dir = "memberimages/";
+        $imageFileType = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+        $target_file = $target_dir . "M_" . $memberid . "." . $imageFileType;
+        move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+        $target_file = "M_" . $memberid . "." . $imageFileType;
 
-    if(!empty($_FILES['image']['name'])){
-        
-      $target_dir = "memberimages/";
-      $imageFileType = strtolower(pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION));
-  
-      $target_file = $target_dir . "M_".$memberid.".". $imageFileType;
-      move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
-      $target_file = "M_".$memberid.".". $imageFileType;
-  
-
-        $stmt = $conn->prepare("update member set member_name=?,home_address=?,contact_no=?,email=?,gender=?,education=?,profession=?,dob=?,home_pincode=?,business_address=?,business_pincode=?,married_status=?,image=? where member_id=?");
-        $stmt->bind_param("ssssssssssssss", $mname, $haddress, $cno,$mail,$gender,$edu,$prof,$dob,$hpin,$businessadd,$businesspin,$mstatus,$target_file,$memberid);
-        // print_r($stmt);
+        $stmt = $conn->prepare("UPDATE member SET member_name=?, home_address=?, contact_no=?, email=?, gender=?, education=?, profession=?, dob=?, home_pincode=?, business_address=?, business_pincode=?, married_status=?, image=? WHERE member_id=?");
+        $stmt->bind_param("ssssssssssssss", $mname, $haddress, $cno, $mail, $gender, $edu, $prof, $dob, $hpin, $businessadd, $businesspin, $mstatus, $target_file, $memberid);
         $stmt->execute();
-        // echo "updated";
-    
-    }
-    else
-    {
-        $stmt = $conn->prepare("update member set member_name=?,home_address=?,contact_no=?,email=?,gender=?,education=?,profession=?,dob=?,home_pincode=?,business_address=?,business_pincode=?,married_status=? where member_id=?");
-        $stmt->bind_param("sssssssssssss", $mname, $haddress, $cno,$mail,$gender,$edu,$prof,$dob,$hpin,$businessadd,$businesspin,$mstatus,$memberid);
-        // print_r($stmt);
+    } else {
+        $stmt = $conn->prepare("UPDATE member SET member_name=?, home_address=?, contact_no=?, email=?, gender=?, education=?, profession=?, dob=?, home_pincode=?, business_address=?, business_pincode=?, married_status=? WHERE member_id=?");
+        $stmt->bind_param("sssssssssssss", $mname, $haddress, $cno, $mail, $gender, $edu, $prof, $dob, $hpin, $businessadd, $businesspin, $mstatus, $memberid);
         $stmt->execute();
-           
-    // $sql = "update member set member_name='$mname',home_address='$haddress',contact_no='$cno',email='$mail',gender='$gender',education='$edu',profession='$prof',dob='$dob',home_pincode='$hpin',business_address='$businessadd',business_pincode='$businesspin',married_status='$mstatus' where member_id='$memberid'";
-    }   // echo $sql;
-    // mysqli_query($con, $sql);
-    //echo $sql;
-    echo "<script>alert('Updated');</script>";
-
     }
-else
-{
-    if(isset($_COOKIE['member_id']))
-    {
+
+    echo "<script>
+        alert('Updated');
+        window.location.href = window.location.href; // Refresh the page
+    </script>";
+    exit();
+} else {
+    if (isset($_COOKIE['member_id'])) {
         $memberid = $_COOKIE['member_id'];
-        $sql = "select * from member where member_id='$memberid'";
-        $data=mysqli_query($conn, $sql);
-        $row=mysqli_fetch_assoc($data);
-    }
-    else
-    {
+        $sql = "SELECT * FROM member WHERE member_id='$memberid'";
+        $data = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($data);
+    } else {
         header("location: login.php");
+        exit();
     }
 }
 ?>
@@ -192,8 +174,12 @@ else
 
 
                 <div class="control-group">
-                      <input type="text" class="form-control" id="married_status" name="married_status" value="<?php if (isset($row['married_status'])) echo $row['married_status'];?>" placeholder="Marital Status" required>
-                      <p class="help-block text-danger"></p>
+                <select class="form-control" id="married_status" name="married_status" required>
+                  <option value="" disabled selected>Select your marital status</option>
+                  <option value="Married" <?php if (isset($row['married_status']) && $row['married_status'] == 'Married') echo 'selected';?>>Married</option>
+                  <option value="Unmarried" <?php if (isset($row['married_status']) && $row['married_status'] == 'Unmarried') echo 'selected';?>>Unmarried</option>
+                </select>                      
+                <p class="help-block text-danger"></p>
                 </div>
 
                 <div class="control-group">
@@ -209,7 +195,7 @@ else
                     id="sendMessageButton"
                     style="min-width:200px"
                   >
-                    Submit Your Data
+                    Update
                   </button>
                 </div>
               </form>
