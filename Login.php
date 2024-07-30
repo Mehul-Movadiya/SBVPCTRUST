@@ -85,6 +85,7 @@ include_once('header.php');
                     placeholder="Your Email"
                     required="required"
                     data-validation-required-message="Please enter your registered email"
+                    maxlength="50"
                   />
                   <p class="help-block text-danger"></p>
                 </div>
@@ -97,6 +98,7 @@ include_once('header.php');
                     placeholder="Your Password"
                     required="required"
                     data-validation-required-message="Please enter your password"
+                    maxlength="8"
                   />
                   <p class="help-block text-danger"></p>
                 </div>
