@@ -3,129 +3,123 @@ include_once('dbconfig.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
+<head>
+    <meta charset="utf-8">
     <title>SBVPCT</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon" />
+    <link href="img/favicon.ico" rel="icon">
+    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css"> -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Flaticon Font -->
-    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet" />
-    <link href="stylesheet.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="stylesheet.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+    <style>
+        /* Custom CSS for dropdown */
+        .navbar-nav .dropdown-menu {
+            border: none;
+            border-radius: 0.25rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet" />
-    <!-- <link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap5.css"> -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
-  </head>
+        .navbar-nav .dropdown-item {
+            padding: 0.5rem 1.5rem;
+            transition: background-color 0.2s ease-in-out;
+        }
 
-  <body>
+        .navbar-nav .dropdown-item:hover,
+        .navbar-nav .dropdown-item:focus {
+            background-color: #f8f9fa;
+        }
+
+        .navbar-nav .dropdown-toggle::after {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
     <!-- Navbar Start -->
-    <div class="container-fluid bg-light position-relative shadow">
-      <nav
-        class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5"
-      >
-      
-      <a href="index.php" class="navbar-brand font-weight-bold text-secondary">
-        <img src="img/logo.png" class="logo" height="110px">
-        <!-- <h4 style="color:skyblue; vertical-align: top;" class="d-inline-block py-4"><b>શ્રી સમસ્ત બાવનગોળ વાટલિયા </br><h4 style="color:skyblue;">&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspપ્રજાપતિ સમાજ</h4></b></h4> -->
-        <span class="text-primary"><div style="display: inline-block;vertical-align:middle;font-family: 'rasabold';">સર્વ બાવનગોળ વાટલિયા<br>પ્રજાપતિ ચેરીટેબલ ટ્રસ્ટ<br>
-        <h6 style="font-size:small">Trust Reg. No.:A/5300/AHMEDABAD</h6></div></span>
-        
-    </a>
-        <!-- <a
-          href=""
-          class="navbar-brand font-weight-bold text-secondary"
-          style="font-size: 50px"
-        >
-          <i class="flaticon-043-teddy-bear"></i>
-          <span class="text-primary">KidKinder</span>
-        </a> -->
-        
-        <button
-          type="button"
-          class="navbar-toggler"
-          data-toggle="collapse"
-          data-target="#navbarCollapse"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div
-          class="collapse navbar-collapse justify-content-between"
-          id="navbarCollapse"
-        >
-          <div class="navbar-nav font-weight-bold mx-auto py-0">
-            <a href="index.php" class="nav-item nav-link <?php if(str_contains($_SERVER['REQUEST_URI'],'index.php')) echo "active";?>">Home</a>
-            <a href="about.php" class="nav-item nav-link <?php if(str_contains($_SERVER['REQUEST_URI'],'about.php')) echo "active";?>">About</a>
-            <a href="committee.php" class="nav-item nav-link <?php if(str_contains($_SERVER['REQUEST_URI'],'committee.php')) echo "active";?>">Committee</a>
-            <a href="events.php" class="nav-item nav-link <?php if(str_contains($_SERVER['REQUEST_URI'],'event')) echo "active";?>">Functions</a>
-            <!-- <a href="gallery.html" class="nav-item nav-link">Gallery</a>
-            <div class="nav-item dropdown">
-              <a
-                href="#"
-                class="nav-link dropdown-toggle"
-                data-toggle="dropdown"
-                >Pages</a
-              >
-              <div class="dropdown-menu rounded-0 m-0">
-                <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                <a href="single.html" class="dropdown-item">Blog Detail</a>
-              </div>
-            </div> -->
-            <?php
-            // session_start();
-            if(isset($_COOKIE['member_id']))
-            {
-            ?>
-            <div class="nav-item dropdown">
-              <a
-                href="#"
-                class="nav-link dropdown-toggle <?php if(str_contains($_SERVER['REQUEST_URI'],'my') or str_contains($_SERVER['REQUEST_URI'],'relative')) echo "active";?>"
-                data-toggle="dropdown"
-                >Myprofile</a
-              >
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container">
+            <a href="index.php" class="navbar-brand">
+                <img src="img/logo.png" alt="Logo" height="80">
+                <span class="text-primary d-inline-block align-middle ml-2">
+                    <div style="font-family: 'rasabold';">
+                        સર્વ બાવનગોળ વાટલિયા<br>પ્રજાપતિ ચેરીટેબલ ટ્રસ્ટ
+                        <h6 class="small">Trust Reg. No.:A/5300/AHMEDABAD</h6>
+                    </div>
+                </span>
+            </a>
             
-            <div class="dropdown-menu rounded-0 m-0">
-                <a href="myprofile.php" class="dropdown-item">Profile</a>
-                <a href="myrelatives.php" class="dropdown-item">Relatives</a>
-                <a href="addrelative.php" class="dropdown-item">Add Relative</a>
-                <a href="logout.php" class="dropdown-item">Logout</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="index.php" class="nav-link <?php echo ($_SERVER['PHP_SELF'] == '/index.php') ? 'active' : ''; ?>">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.php" class="nav-link <?php echo ($_SERVER['PHP_SELF'] == '/about.php') ? 'active' : ''; ?>">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="committee.php" class="nav-link <?php echo ($_SERVER['PHP_SELF'] == '/committee.php') ? 'active' : ''; ?>">Committee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="events.php" class="nav-link <?php echo (strpos($_SERVER['PHP_SELF'], 'event') !== false) ? 'active' : ''; ?>">Functions</a>
+                    </li>
+                    <?php if(isset($_COOKIE['member_id'])): ?>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle <?php echo (strpos($_SERVER['PHP_SELF'], 'my') !== false || strpos($_SERVER['PHP_SELF'], 'relative') !== false) ? 'active' : ''; ?>" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                My Profile
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="myprofile.php">Profile</a></li>
+                                <li><a class="dropdown-item" href="myrelatives.php">Relatives</a></li>
+                                <li><a class="dropdown-item" href="addrelative.php">Add Relative</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                            </ul>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav-item">
+                            <a href="Login.php" class="nav-link">Login</a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+                <a href="memberlist.php" class="btn btn-primary ms-3">Members</a>
             </div>
-            </div>
-            <?php
-            }
-            else
-            {
-                ?>
-            <a href="Login.php" class="nav-item nav-link">Login</a>
-            <?php
-            }
-            ?>
-          </div>
-          <a href="memberlist.php" class="btn btn-primary px-4">Members</a>
         </div>
-      </nav>
-    </div>
+    </nav>
     <!-- Navbar End -->
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Additional JavaScript to ensure dropdown functionality -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+        var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+            return new bootstrap.Dropdown(dropdownToggleEl)
+        })
+    });
+    </script>
+</body>
+</html>

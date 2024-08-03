@@ -115,6 +115,7 @@ include_once('header.php');
                 </div>
                 <div style="text-align:center; margin-top: 20px;">
                   <p>New user? <a href="registration.php">Register here</a></p>
+                  <p><a href="forgetpassword.php">Forgot Password?</a></p>
                 </div>
               </form>
             </div>

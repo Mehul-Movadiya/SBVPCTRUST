@@ -21,6 +21,7 @@ include_once('header.php');
       <div class="carousel-caption d-none d-md-block">
         <!-- <h5>Second slide label</h5>
         <p>Some representative placeholder content for the second slide.</p> -->
+        
       </div>
     </div>
     <div class="carousel-item">
