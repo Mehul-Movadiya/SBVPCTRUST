@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     background-color: #f8f9fa;
     border-radius: 10px;
     padding: 30px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   }
 
   .update-profile-form h1 {
@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     border: none;
     padding: 10px 30px;
     font-size: 18px;
-    transition: background-color 0.3s;
+    transition: background-color 0.7s;
   }
 
   .update-profile-form .btn-primary:hover {

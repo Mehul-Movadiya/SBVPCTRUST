@@ -44,6 +44,7 @@ include_once('header.php');
 
 
 
+
     <!-- Header Start -->
     <!-- <div class="container-fluid bg-primary mb-5">
       <div
@@ -111,6 +112,9 @@ include_once('header.php');
                   >
                     Sign-in
                   </button>
+                </div>
+                <div style="text-align:center; margin-top: 20px;">
+                  <p>New user? <a href="registration.php">Register here</a></p>
                 </div>
               </form>
             </div>
