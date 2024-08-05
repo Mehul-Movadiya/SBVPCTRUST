@@ -1,0 +1,283 @@
+2024-08-04 07:08:59 [3] Connection: opening to ssl://webmail.sbvpctrust.com:465, timeout=300, options=array()
+2024-08-04 07:09:00 [3] Connection: opened
+2024-08-04 07:09:00 [2] SERVER -> CLIENT: 220 innovate.herosite.pro ESMTP MailEnable Service, Version: 10.46-- ready at 08/04/24 12:38:53
+
+2024-08-04 07:09:00 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-08-04 07:09:00 [2] SERVER -> CLIENT: 250-home [152.59.34.192], this server offers 5 extensions
+250-AUTH LOGIN
+250-SIZE 40960000
+250-HELP
+250-AUTH=LOGIN
+250 CLIENTID
+
+2024-08-04 07:09:00 [1] CLIENT -> SERVER: AUTH LOGIN
+
+2024-08-04 07:09:00 [2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+2024-08-04 07:09:00 [1] CLIENT -> SERVER: [credentials hidden]
+2024-08-04 07:09:01 [2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+2024-08-04 07:09:01 [1] CLIENT -> SERVER: [credentials hidden]
+2024-08-04 07:09:01 [2] SERVER -> CLIENT: 235 Authenticated
+
+2024-08-04 07:09:01 [1] CLIENT -> SERVER: MAIL FROM:<info@sbvpctrust.com>
+
+2024-08-04 07:09:01 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-08-04 07:09:01 [1] CLIENT -> SERVER: RCPT TO:<movadiyamehul660@gmail.com>
+
+2024-08-04 07:09:02 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: DATA
+
+2024-08-04 07:09:02 [2] SERVER -> CLIENT: 354 Start mail input; end with <CRLF>.<CRLF>
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: Date: Sun, 4 Aug 2024 07:08:59 +0000
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: To: movadiyamehul660@gmail.com
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: From: SBVP Admin <info@sbvpctrust.com>
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: Subject: New Password
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: Message-ID: <96b0pxwhcaUAeocQF1XReRqswMgRXB7CSLaThtBhYt0@localhost>
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.9.1 (https://github.com/PHPMailer/PHPMailer)
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: MIME-Version: 1.0
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER:  boundary="b1=_96b0pxwhcaUAeocQF1XReRqswMgRXB7CSLaThtBhYt0"
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: --b1=_96b0pxwhcaUAeocQF1XReRqswMgRXB7CSLaThtBhYt0
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: Content-Type: text/plain; charset=us-ascii
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: Your new password is: LM5Dxce9
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: --b1=_96b0pxwhcaUAeocQF1XReRqswMgRXB7CSLaThtBhYt0
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: Content-Type: text/html; charset=us-ascii
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: Your new password is: <b>LM5Dxce9</b>
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: --b1=_96b0pxwhcaUAeocQF1XReRqswMgRXB7CSLaThtBhYt0--
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:09:02 [1] CLIENT -> SERVER: .
+
+2024-08-04 07:09:03 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-08-04 07:09:03 [1] CLIENT -> SERVER: QUIT
+
+2024-08-04 07:09:03 [2] SERVER -> CLIENT: 221 Service closing transmission channel
+
+2024-08-04 07:09:03 [3] Connection: closed
+2024-08-04 07:09:41 [3] Connection: opening to ssl://webmail.sbvpctrust.com:465, timeout=300, options=array()
+2024-08-04 07:09:41 [3] Connection: opened
+2024-08-04 07:09:41 [2] SERVER -> CLIENT: 220 innovate.herosite.pro ESMTP MailEnable Service, Version: 10.46-- ready at 08/04/24 12:39:35
+
+2024-08-04 07:09:41 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-08-04 07:09:42 [2] SERVER -> CLIENT: 250-home [152.59.34.192], this server offers 5 extensions
+250-AUTH LOGIN
+250-SIZE 40960000
+250-HELP
+250-AUTH=LOGIN
+250 CLIENTID
+
+2024-08-04 07:09:42 [1] CLIENT -> SERVER: AUTH LOGIN
+
+2024-08-04 07:09:42 [2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+2024-08-04 07:09:42 [1] CLIENT -> SERVER: [credentials hidden]
+2024-08-04 07:09:42 [2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+2024-08-04 07:09:42 [1] CLIENT -> SERVER: [credentials hidden]
+2024-08-04 07:09:42 [2] SERVER -> CLIENT: 235 Authenticated
+
+2024-08-04 07:09:42 [1] CLIENT -> SERVER: MAIL FROM:<info@sbvpctrust.com>
+
+2024-08-04 07:09:42 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-08-04 07:09:42 [1] CLIENT -> SERVER: RCPT TO:<movadiyamehul660@gmail.com>
+
+2024-08-04 07:09:42 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-08-04 07:09:42 [1] CLIENT -> SERVER: DATA
+
+2024-08-04 07:09:43 [2] SERVER -> CLIENT: 354 Start mail input; end with <CRLF>.<CRLF>
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: Date: Sun, 4 Aug 2024 07:09:41 +0000
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: To: movadiyamehul660@gmail.com
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: From: SBVP Admin <info@sbvpctrust.com>
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: Subject: New Password
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: Message-ID: <mmkMxAcPwPk03REUnTxnnY6u3b786s9YJl62TnpwGg@localhost>
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.9.1 (https://github.com/PHPMailer/PHPMailer)
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: MIME-Version: 1.0
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER:  boundary="b1=_mmkMxAcPwPk03REUnTxnnY6u3b786s9YJl62TnpwGg"
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: --b1=_mmkMxAcPwPk03REUnTxnnY6u3b786s9YJl62TnpwGg
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: Content-Type: text/plain; charset=us-ascii
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: Your new password is: pIhctOYB
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: --b1=_mmkMxAcPwPk03REUnTxnnY6u3b786s9YJl62TnpwGg
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: Content-Type: text/html; charset=us-ascii
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: Your new password is: <b>pIhctOYB</b>
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: --b1=_mmkMxAcPwPk03REUnTxnnY6u3b786s9YJl62TnpwGg--
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: .
+
+2024-08-04 07:09:43 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-08-04 07:09:43 [1] CLIENT -> SERVER: QUIT
+
+2024-08-04 07:09:44 [2] SERVER -> CLIENT: 221 Service closing transmission channel
+
+2024-08-04 07:09:44 [3] Connection: closed
+2024-08-04 07:13:13 [3] Connection: opening to ssl://webmail.sbvpctrust.com:465, timeout=300, options=array()
+2024-08-04 07:13:13 [3] Connection failed. Error #2: stream_socket_client(): SSL: An existing connection was forcibly closed by the remote host [C:\wamp64\www\SBVPCTRUST\api\PHPMailer\SMTP.php line 409]
+2024-08-04 07:13:13 [3] Connection: opened
+2024-08-04 07:13:13 [2] SERVER -> CLIENT: 
+2024-08-04 07:13:13 [3] Connection: closing due to error
+2024-08-04 07:13:13 [3] Connection: closed
+2024-08-04 07:13:13 [3] SMTP Error: Could not connect to SMTP host. Connection failed. stream_socket_client(): SSL: An existing connection was forcibly closed by the remote host
+2024-08-04 07:13:29 [3] Connection: opening to ssl://webmail.sbvpctrust.com:465, timeout=300, options=array()
+2024-08-04 07:13:30 [3] Connection: opened
+2024-08-04 07:13:30 [2] SERVER -> CLIENT: 220 innovate.herosite.pro ESMTP MailEnable Service, Version: 10.46-- ready at 08/04/24 12:43:24
+
+2024-08-04 07:13:30 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-08-04 07:13:30 [2] SERVER -> CLIENT: 250-home [152.59.34.192], this server offers 5 extensions
+250-AUTH LOGIN
+250-SIZE 40960000
+250-HELP
+250-AUTH=LOGIN
+250 CLIENTID
+
+2024-08-04 07:13:30 [1] CLIENT -> SERVER: AUTH LOGIN
+
+2024-08-04 07:13:30 [2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+2024-08-04 07:13:30 [1] CLIENT -> SERVER: [credentials hidden]
+2024-08-04 07:13:30 [2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+2024-08-04 07:13:30 [1] CLIENT -> SERVER: [credentials hidden]
+2024-08-04 07:13:31 [2] SERVER -> CLIENT: 235 Authenticated
+
+2024-08-04 07:13:31 [1] CLIENT -> SERVER: MAIL FROM:<info@sbvpctrust.com>
+
+2024-08-04 07:13:31 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-08-04 07:13:31 [1] CLIENT -> SERVER: RCPT TO:<movadiyamehul660@gmail.com>
+
+2024-08-04 07:13:31 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-08-04 07:13:31 [1] CLIENT -> SERVER: DATA
+
+2024-08-04 07:13:32 [2] SERVER -> CLIENT: 354 Start mail input; end with <CRLF>.<CRLF>
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: Date: Sun, 4 Aug 2024 07:13:29 +0000
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: To: movadiyamehul660@gmail.com
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: From: SBVP Admin <info@sbvpctrust.com>
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: Subject: New Password
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: Message-ID: <N8SgYv4Qp44eBmZuiJvGPmNS9p7hefz1tkAtzY0z5w@localhost>
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.9.1 (https://github.com/PHPMailer/PHPMailer)
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: MIME-Version: 1.0
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER:  boundary="b1=_N8SgYv4Qp44eBmZuiJvGPmNS9p7hefz1tkAtzY0z5w"
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: --b1=_N8SgYv4Qp44eBmZuiJvGPmNS9p7hefz1tkAtzY0z5w
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: Content-Type: text/plain; charset=us-ascii
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: Your new password is: Jk2cu47e
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: --b1=_N8SgYv4Qp44eBmZuiJvGPmNS9p7hefz1tkAtzY0z5w
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: Content-Type: text/html; charset=us-ascii
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: Your new password is: <b>Jk2cu47e</b>
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: --b1=_N8SgYv4Qp44eBmZuiJvGPmNS9p7hefz1tkAtzY0z5w--
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: 
+
+2024-08-04 07:13:32 [1] CLIENT -> SERVER: .
+
+2024-08-04 07:13:33 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-08-04 07:13:33 [1] CLIENT -> SERVER: QUIT
+
+2024-08-04 07:13:33 [2] SERVER -> CLIENT: 221 Service closing transmission channel
+
+2024-08-04 07:13:33 [3] Connection: closed

@@ -17,46 +17,69 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['email'])) {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        // Generate OTP
-        $otp = rand(100000, 999999);
+        $row = $result->fetch_assoc();
+        $id = $row['member_id'];
 
-        // Store OTP in session
-        session_start();
-        $_SESSION['otp'] = $otp;
-        $_SESSION['email'] = $email;
-        
-        // Send OTP to user's email
+        // Generate new password
+        $new_password = getName(8);
+
+        // Update the new password in the database
+        $hashed_password = password_hash($new_password, PASSWORD_DEFAULT); // Hash the password
+        $update_stmt = $conn->prepare("UPDATE member SET password=? WHERE member_id=?");
+        $update_stmt->bind_param("si", $new_password, $id);
+        $update_stmt->execute();
+
+        // Send new password to user's email
         $mail = new PHPMailer(true);
 
         try {
             //Server settings
             $mail->isSMTP();
-            $mail->Host       = 'webmail.sbvpsamaj.com';
+            $mail->Host       = 'webmail.sbvpctrust.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'info@sbvpsamaj.com';
+            $mail->Username   = 'info@sbvpctrust.com';
             $mail->Password   = 'Abc@123#123';
-            $mail->SMTPSecure = 'ssl'; // For SSL
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // For SSL
             $mail->Port       = 465;   // For SSL
 
+            // Enable verbose debug output
+            $mail->SMTPDebug = 0;
+            $mail->Debugoutput = function($str, $level) {
+                file_put_contents('phpmailer_debug.log', date('Y-m-d H:i:s')." [$level] $str\n", FILE_APPEND);
+            };
+
             //Recipients
-            $mail->setFrom('info@sbvpsamaj.com', 'SBVP Admin');
+            $mail->setFrom('info@sbvpctrust.com', 'SBVP Admin');
             $mail->addAddress($email);
 
             // Content
             $mail->isHTML(true);
-            $mail->Subject = 'Password Reset OTP';
-            $mail->Body    = "Your OTP for password reset is: <b>$otp</b>";
-            $mail->AltBody = "Your OTP for password reset is: $otp";
+            $mail->Subject = 'New Password';
+            $mail->Body    = "Your new password is: <b>$new_password</b>";
+            $mail->AltBody = "Your new password is: $new_password";
 
             $mail->send();
-            echo "<script>alert('OTP sent to your email.');</script>";
-            header("Location: verifyotp.php");
+            echo "<script>alert('New password sent to your email.');</script>";
+            header("Location: login.php");
         } catch (Exception $e) {
             echo "<script>alert('Message could not be sent. Mailer Error: {$mail->ErrorInfo}');</script>";
+            file_put_contents('phpmailer_error.log', "Mailer Error: {$mail->ErrorInfo}\n", FILE_APPEND);
         }
     } else {
         echo "<script>alert('Email not registered.');</script>";
     }
+}
+
+function getName($n) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomString = '';
+    
+    for ($i = 0; $i < $n; $i++) {
+        $index = rand(0, strlen($characters) - 1);
+        $randomString .= $characters[$index];
+    }
+    
+    return $randomString;
 }
 ?>
 
@@ -91,10 +114,10 @@ include_once('header.php');
               <button
                 class="btn btn-primary py-2 px-4"
                 type="submit"
-                id="sendOtpButton"
+                id="sendPasswordButton"
                 style="min-width:200px"
               >
-                Send OTP
+                Send New Password
               </button>
             </div>
           </form>

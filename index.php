@@ -1,6 +1,27 @@
 <?php
 include_once('header.php');
 ?>
+<style>
+    .team-member {
+        transition: all 0.3s ease;
+    }
+    .team-member:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .member-img-wrapper {
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
+        margin: 0 auto;
+        border-radius: 50%;
+    }
+    .member-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" >
   <div class="carousel-indicators">

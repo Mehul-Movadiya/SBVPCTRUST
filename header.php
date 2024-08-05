@@ -29,25 +29,34 @@ include_once('dbconfig.php');
     <link href="css/style.css" rel="stylesheet">
 
     <style>
-        /* Custom CSS for dropdown */
+        .navbar-nav .nav-item {
+            position: relative;
+        }
+        .navbar-nav .nav-link {
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-item:hover > .nav-link {
+            color: #0d6efd !important;
+        }
         .navbar-nav .dropdown-menu {
             border: none;
             border-radius: 0.25rem;
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            display: none;
         }
-
+        .navbar-nav .dropdown:hover > .dropdown-menu {
+            display: block;
+        }
         .navbar-nav .dropdown-item {
             padding: 0.5rem 1.5rem;
-            transition: background-color 0.2s ease-in-out;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
         }
-
         .navbar-nav .dropdown-item:hover,
         .navbar-nav .dropdown-item:focus {
             background-color: #f8f9fa;
-        }
-
-        .navbar-nav .dropdown-toggle::after {
-            vertical-align: middle;
+            color: #0d6efd;
         }
     </style>
 </head>
