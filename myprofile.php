@@ -20,6 +20,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $businessadd = strip_tags($_POST['business_address']);
     $businesspin = strip_tags($_POST['business_pincode']);
     $mstatus = strip_tags($_POST['married_status']);
+    $password = $_POST['password'];
+    $confirm_password = $_POST['password'];
+
+    if (!empty($password)) {
+      if ($password === $confirm_password) {
+          $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+          $stmt = $conn->prepare("UPDATE member SET password=? WHERE member_id=?");
+          $stmt->bind_param("ss", $password, $memberid);
+          if ($stmt->execute()) {
+              echo "<script>alert('Password updated successfully.');</script>";
+          } else {
+              echo "<script>alert('Failed to update password.');</script>";
+          }
+      } else {
+          echo "<script>alert('New password and confirm password do not match.');</script>";
+      }
+  }
+  
 
     if (!empty($_FILES['image']['name'])) {
       // Fetch the old image name from the database
@@ -148,6 +166,64 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     margin-bottom: 10px;
     border-radius: 5px;
   }
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .form-row .form-group {
+    width: 48%;
+    margin-bottom: 0;
+  }
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .form-group {
+    width: 48%;
+  }
+  .input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+  }
+  .input-group .form-control {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+    margin-bottom: 0;
+  }
+  .input-group-append {
+    display: flex;
+    margin-left: -1px;
+  }
+  .input-group > .form-control:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .input-group > .input-group-append > .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .btn-toggle-password {
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border: 1px solid #ced4da;
+    background-color: #e9ecef;
+    color: #495057;
+  }
+  .btn-toggle-password:hover {
+    background-color: #dde0e3;
+  }
+  .btn-toggle-password:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+  }
 </style>
 
 
@@ -171,71 +247,100 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <div class="container-fluid pt-5">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-lg-8">
+      <div class="col-lg-10">
         <div class="update-profile-form">
           <h1 class="text-center mb-4">Update Profile</h1>
           <form novalidate="novalidate" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-              <input type="text" class="form-control" id="member_name" name="member_name" value="<?php echo isset($row['member_name']) ? htmlspecialchars($row['member_name']) : ''; ?>" placeholder="Name" required>
+            <div class="form-row">
+              <div class="form-group">
+                <input type="text" class="form-control" id="member_name" name="member_name" value="<?php echo isset($row['member_name']) ? htmlspecialchars($row['member_name']) : ''; ?>" placeholder="Name" required>
+              </div>
+              <div class="form-group">
+                <input type="tel" class="form-control" id="contact_no" name="contact_no" value="<?php echo isset($row['contact_no']) ? htmlspecialchars($row['contact_no']) : ''; ?>" placeholder="Contact Number" required>
+              </div>
             </div>
 
-            <div class="form-group">
-              <input type="text" class="form-control" id="home_address" name="home_address" value="<?php echo isset($row['home_address']) ? htmlspecialchars($row['home_address']) : ''; ?>" placeholder="Home Address" required>
+            <div class="form-row">
+              <div class="form-group">
+                <input type="email" class="form-control" id="email" name="email" value="<?php echo isset($row['email']) ? htmlspecialchars($row['email']) : ''; ?>" placeholder="Email" required>
+              </div>
+              <div class="form-group">
+                <input type="date" class="form-control" id="dob" name="dob" value="<?php echo isset($row['dob']) ? htmlspecialchars($row['dob']) : ''; ?>" required>
+              </div>
             </div>
 
-            <div class="form-group">
-              <input type="tel" class="form-control" id="contact_no" name="contact_no" value="<?php echo isset($row['contact_no']) ? htmlspecialchars($row['contact_no']) : ''; ?>" placeholder="Contact Number" required>
+            <div class="form-row">
+              <div class="form-group">
+                <input type="text" class="form-control" id="education" name="education" value="<?php echo isset($row['education']) ? htmlspecialchars($row['education']) : ''; ?>" placeholder="Education" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="profession" name="profession" value="<?php echo isset($row['profession']) ? htmlspecialchars($row['profession']) : ''; ?>" placeholder="Profession" required>
+              </div>
             </div>
 
-            <div class="form-group">
-              <input type="email" class="form-control" id="email" name="email" value="<?php echo isset($row['email']) ? htmlspecialchars($row['email']) : ''; ?>" placeholder="Email" required>
+            <div class="form-row">
+              <div class="form-group">
+                <input type="text" class="form-control" id="home_address" name="home_address" value="<?php echo isset($row['home_address']) ? htmlspecialchars($row['home_address']) : ''; ?>" placeholder="Home Address" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="home_pincode" name="home_pincode" value="<?php echo isset($row['home_pincode']) ? htmlspecialchars($row['home_pincode']) : ''; ?>" placeholder="Home Pincode" required>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label>Gender</label>
-              <div class="gender-group">
-                <div class="form-check form-check-inline">
-                  <input type="radio" class="form-check-input" name="gender" id="male" value="Male" <?php echo (isset($row['gender']) && $row['gender'] == 'Male') ? 'checked' : ''; ?>>
-                  <label class="form-check-label" for="male">Male</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input type="radio" class="form-check-input" name="gender" id="female" value="Female" <?php echo (isset($row['gender']) && $row['gender'] == 'Female') ? 'checked' : ''; ?>>
-                  <label class="form-check-label" for="female">Female</label>
+            <div class="form-row">
+              <div class="form-group">
+                <input type="text" class="form-control" id="business_address" name="business_address" value="<?php echo isset($row['business_address']) ? htmlspecialchars($row['business_address']) : ''; ?>" placeholder="Business Address" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="business_pincode" name="business_pincode" value="<?php echo isset($row['business_pincode']) ? htmlspecialchars($row['business_pincode']) : ''; ?>" placeholder="Business Pincode" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <select class="form-control" id="married_status" name="married_status" required>
+                  <option value="" disabled selected>Select your marital status</option>
+                  <option value="Married" <?php echo (isset($row['married_status']) && $row['married_status'] == 'Married') ? 'selected' : ''; ?>>Married</option>
+                  <option value="Unmarried" <?php echo (isset($row['married_status']) && $row['married_status'] == 'Unmarried') ? 'selected' : ''; ?>>Unmarried</option>
+                </select>
+              </div>
+              <div class="form-group gender-group">
+                <label>Gender</label>
+                <div>
+                  <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" name="gender" id="male" value="Male" <?php echo (isset($row['gender']) && $row['gender'] == 'Male') ? 'checked' : ''; ?>>
+                    <label class="form-check-label" for="male">Male</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" name="gender" id="female" value="Female" <?php echo (isset($row['gender']) && $row['gender'] == 'Female') ? 'checked' : ''; ?>>
+                    <label class="form-check-label" for="female">Female</label>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="form-group">
-              <input type="text" class="form-control" id="education" name="education" value="<?php echo isset($row['education']) ? htmlspecialchars($row['education']) : ''; ?>" placeholder="Education" required>
-            </div>
-
-            <div class="form-group">
-              <input type="text" class="form-control" id="profession" name="profession" value="<?php echo isset($row['profession']) ? htmlspecialchars($row['profession']) : ''; ?>" placeholder="Profession" required>
-            </div>
-
-            <div class="form-group">
-              <input type="date" class="form-control" id="dob" name="dob" value="<?php echo isset($row['dob']) ? htmlspecialchars($row['dob']) : ''; ?>" required>
-            </div>
-
-            <div class="form-group">
-              <input type="text" class="form-control" id="home_pincode" name="home_pincode" value="<?php echo isset($row['home_pincode']) ? htmlspecialchars($row['home_pincode']) : ''; ?>" placeholder="Home Pincode" required>
-            </div>
-
-            <div class="form-group">
-              <input type="text" class="form-control" id="business_address" name="business_address" value="<?php echo isset($row['business_address']) ? htmlspecialchars($row['business_address']) : ''; ?>" placeholder="Business Address" required>
-            </div>
-
-            <div class="form-group">
-              <input type="text" class="form-control" id="business_pincode" name="business_pincode" value="<?php echo isset($row['business_pincode']) ? htmlspecialchars($row['business_pincode']) : ''; ?>" placeholder="Business Pincode" required>
-            </div>
-
-            <div class="form-group">
-              <select class="form-control" id="married_status" name="married_status" required>
-                <option value="" disabled selected>Select your marital status</option>
-                <option value="Married" <?php echo (isset($row['married_status']) && $row['married_status'] == 'Married') ? 'selected' : ''; ?>>Married</option>
-                <option value="Unmarried" <?php echo (isset($row['married_status']) && $row['married_status'] == 'Unmarried') ? 'selected' : ''; ?>>Unmarried</option>
-              </select>
-            </div>
+            <div class="form-row">
+              <div class="form-group">
+                  <div class="input-group">
+                      <input type="password" class="form-control" id="password" name="password" value="<?php echo isset($row['password']) ? htmlspecialchars($row['password']) : ''; ?>" placeholder="New Password">
+                      <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password')">
+                              <i class="fa fa-eye" id="password-eye"></i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <div class="input-group">
+                      <input type="password" class="form-control" id="confirm_password" name="confirm_password" value="<?php echo isset($row['password']) ? htmlspecialchars($row['password']) : ''; ?>" placeholder="Confirm New Password">
+                      <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('confirm_password')">
+                              <i class="fa fa-eye" id="confirm_password-eye"></i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
 
             <div class="form-group">
               <label for="image">Profile Picture</label>
@@ -293,5 +398,21 @@ function Filevalidation() {
   if (input.files && input.files[0]) {
     reader.readAsDataURL(input.files[0]);
   }
+}
+</script>
+<script>
+function togglePassword(fieldId) {
+    var field = document.getElementById(fieldId);
+    var eye = document.getElementById(fieldId + '-eye');
+    
+    if (field.type === "password") {
+        field.type = "text";
+        eye.classList.remove("fa-eye");
+        eye.classList.add("fa-eye-slash");
+    } else {
+        field.type = "password";
+        eye.classList.remove("fa-eye-slash");
+        eye.classList.add("fa-eye");
+    }
 }
 </script>
