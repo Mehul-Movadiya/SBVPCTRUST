@@ -142,12 +142,36 @@ include_once('dbconfig.php');
 
     <!-- Additional JavaScript to ensure dropdown functionality -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
-        var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
-            return new bootstrap.Dropdown(dropdownToggleEl)
-        })
+document.addEventListener('DOMContentLoaded', function() {
+    var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+    var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+        return new bootstrap.Dropdown(dropdownToggleEl);
     });
-    </script>
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        dropdownList.forEach(function(dropdown) {
+            if (!dropdown._element.contains(event.target)) {
+                dropdown.hide();
+            }
+        });
+    });
+
+    // Toggle dropdown on click
+    dropdownElementList.forEach(function(dropdownToggle) {
+        dropdownToggle.addEventListener('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            dropdownList.forEach(function(dropdown) {
+                if (dropdown._element === this) {
+                    dropdown.toggle();
+                } else {
+                    dropdown.hide();
+                }
+            }, this);
+        });
+    });
+});
+</script>
 </body>
 </html>
