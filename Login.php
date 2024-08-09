@@ -1,3 +1,4 @@
+
 <?php
 include_once('dbconfig.php');
 
@@ -35,6 +36,17 @@ if ($_SERVER['REQUEST_METHOD']=="POST")
         {
           echo "<script>alert('Please enter valid data');</script>";
         }
+
+        $_SESSION['member_id'] = $member_id;
+        $_SESSION['member_name'] = $member_name;
+
+        // Optional: Set a cookie for persistent login (e.g., valid for 30 days)
+        setcookie('member_id', $member_id, time() + (30 * 24 * 60 * 60), "/");
+        setcookie('member_name', $member_name, time() + (30 * 24 * 60 * 60), "/");
+
+        // Redirect to the member list or home page
+        header("Location: memberlist.php");
+        exit();
   }
 ?>
 <?php

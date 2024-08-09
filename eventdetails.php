@@ -60,26 +60,74 @@ if ($data1->num_rows > 0) {
             <?php while($row1 = $data1->fetch_assoc()) { ?>
                 <div class="col-lg-4 col-md-6 mb-4 portfolio-item">
                     <div class="position-relative overflow-hidden mb-2">
-                        <img class="img-fluid w-100 fixed-size" src="functionimages/<?php echo htmlspecialchars($row1['imgurl']); ?>" alt="Image" />
+                        <div class="image-wrapper">
+                            <img class="img-fluid w-100" src="functionimages/<?php echo htmlspecialchars($row1['imgurl']); ?>" alt="Image" />
+                        </div>
+                        <div class="portfolio-overlay">
+                            <a class="btn btn-outline-light" href="functionimages/<?php echo htmlspecialchars($row1['imgurl']); ?>" data-lightbox="portfolio">
+                                <i class="fa fa-plus text-primary"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             <?php } ?>       
         </div>
     </div>
 </div>
+
 <!-- Portfolio End -->
+
 <?php } ?>
 
 <?php include_once('footer.php'); ?>
 
+
 <!-- Custom CSS -->
 <style>
-    .fixed-size {
-        width: 100%;
-        height: 200px; /* Set a fixed height */
-        object-fit: cover; /* Ensure images cover the fixed dimensions */
+    .portfolio-item {
+        position: relative;
+        overflow: hidden;
     }
-    .portfolio-item .portfolio-btn {
-        display: none; /* Remove hover effect */
+    .image-wrapper {
+        width: 100%;
+        padding-top: 75%; /* 4:3 Aspect Ratio */
+        position: relative;
+        overflow: hidden;
+    }
+    .image-wrapper img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .portfolio-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .portfolio-item:hover .portfolio-overlay {
+        opacity: 1;
+    }
+    .portfolio-overlay a {
+        display: inline-block;
+        padding: 10px 20px;
+        border: 2px solid #fff;
+        color: #fff;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+    .portfolio-overlay a:hover {
+        background: #fff;
+        color: #000;
     }
 </style>

@@ -1,3 +1,20 @@
+<?php
+session_start();
+
+// If the session doesn't exist and there's no valid cookie, redirect to login page
+if (!isset($_SESSION['member_id']) && !isset($_COOKIE['member_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// If the session doesn't exist but the cookie does, recreate the session
+if (!isset($_SESSION['member_id']) && isset($_COOKIE['member_id'])) {
+    $_SESSION['member_id'] = $_COOKIE['member_id'];
+    $_SESSION['member_name'] = $_COOKIE['member_name'];
+}
+
+include_once('dbconfig.php');
+?>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
